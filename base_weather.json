@@ -1,0 +1,202 @@
+{
+  "spring": [
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "wind1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 10,
+      "setup": {
+        "name": "Thunderseve",
+        "lighting": 1,
+        "localizedName": "uiSapThundery"
+      }
+    }
+  ],
+  "summer": [
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "wind1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 10,
+      "setup": {
+        "name": "Thunderseve",
+        "lighting": 1,
+        "localizedName": "uiSapThundery"
+      }
+    }
+  ],
+  "autumn": [
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "wind1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 10,
+      "setup": {
+        "name": "Thunderseve",
+        "lighting": 1,
+        "localizedName": "uiSapThundery"
+      }
+    }
+  ],
+  "winter": [
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "Fair2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 20,
+      "setup": {
+        "name": "wind1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity1",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 15,
+      "setup": {
+        "name": "humidity2",
+        "lighting": 1,
+        "localizedName": "uiFair"
+      }
+    },
+    {
+      "weight": 10,
+      "setup": {
+        "name": "Thunderseve",
+        "lighting": 1,
+        "localizedName": "uiSapThundery"
+      }
+    }
+  ]
+}
