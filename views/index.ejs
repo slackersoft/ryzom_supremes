@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Supremes</title>
+<link rel="stylesheet" href="http://api.ryzom.com/data/css/ryzom_ui.css" />
+<link rel="stylesheet" href="/css/index.css" />
+</head>
+<body>
+<div id="main">
+<div class="ryzom-ui ryzom-ui-header">
+  <div class="ryzom-ui-tl">
+    <div class="ryzom-ui-tr">
+      <div class="ryzom-ui-t">
+        Supremes
+      </div>
+    </div>
+  </div>
+
+  <div class="ryzom-ui-l">
+    <div class="ryzom-ui-r">
+      <div class="ryzom-ui-m">
+        <div class="ryzom-ui-body">
+          <ol>
+          <% weather.forEach(w => { %>
+            <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.hourOfDay %></span> <%= w.humidity %></li>
+          <% }) %>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ryzom-ui-bl">
+    <div class="ryzom-ui-br">
+      <div class="ryzom-ui-b"></div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

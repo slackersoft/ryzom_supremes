@@ -1,0 +1,31 @@
+body {
+  background: black;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+.hour {
+  display: inline-block;
+  width: 30px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.best {
+  color: #FF00FF;
+}
+
+.good {
+  color: #00CCFF;
+}
+
+.bad {
+  color: #A494E4;
+}
+
+.worst {
+  color: #FF7500;
+}
