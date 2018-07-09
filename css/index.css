@@ -1,5 +1,25 @@
 body {
   background: black;
+  color: #eee;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  vertical-align: top;
+}
+
+.nav {
+  width: 20%;
+  max-width: 200px;
+  line-height: 1.5;
+}
+
+.nav a {
+  display: block;
+  color: #ffda3b;
 }
 
 ol {

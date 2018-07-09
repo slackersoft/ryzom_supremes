@@ -19,11 +19,39 @@
     <div class="ryzom-ui-r">
       <div class="ryzom-ui-m">
         <div class="ryzom-ui-body">
-          <ol>
-          <% weather.forEach(w => { %>
-            <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.hourOfDay %></span> <%= w.humidity %></li>
-          <% }) %>
-          </ol>
+          <table>
+            <tbody>
+              <tr>
+                <td class="nav">
+                  <a href="?zone=FD">Forbidden Depths</a>
+                  <a href="?zone=LoC">Land of Continuity</a>
+                  <a href="?zone=SC">Sunken City</a>
+                  <a href="?zone=US">Under Spring</a>
+                </td>
+                <td>
+                  <ol>
+                  <% weather.forEach(w => { %>
+                    <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.hourOfDay %></span> <%= w.humidity %></li>
+                  <% }) %>
+                  </ol>
+                </td>
+                <% if(zone) { %>
+                  <td>
+                    <h2><%= zone %> Materials</h2>
+                    <% if(supremes.length > 0) { %>
+                      <ul>
+                      <% supremes.forEach(mat => { %>
+                        <li><%= mat.name %></li>
+                      <% }) %>
+                      </ul>
+                    <% } else { %>
+                      <div>Nothing up in this weather</div>
+                    <% } %>
+                  </td>
+                <% } %>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
