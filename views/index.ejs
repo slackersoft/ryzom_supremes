@@ -23,10 +23,9 @@
             <tbody>
               <tr>
                 <td class="nav">
-                  <a href="?zone=FD">Forbidden Depths</a>
-                  <a href="?zone=LoC">Land of Continuity</a>
-                  <a href="?zone=SC">Sunken City</a>
-                  <a href="?zone=US">Under Spring</a>
+                <% Object.keys(zones).forEach(z => { %>
+                  <a href="?zone=<%= z %>"><%= zones[z] %></a>
+                <% }) %>
                 </td>
                 <td>
                   <ol>
@@ -37,11 +36,11 @@
                 </td>
                 <% if(zone) { %>
                   <td>
-                    <h2><%= zone %> Materials</h2>
+                    <h2><%= zones[zone] %> Materials</h2>
                     <% if(supremes.length > 0) { %>
-                      <ul>
+                      <ul class="materials">
                       <% supremes.forEach(mat => { %>
-                        <li><%= mat.name %></li>
+                        <li class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></li>
                       <% }) %>
                       </ul>
                     <% } else { %>

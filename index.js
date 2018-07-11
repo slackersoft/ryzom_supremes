@@ -5,6 +5,13 @@ const humidity = require('./lib/humidity');
 const materials = require('./lib/materials');
 const WeatherReport = require('./lib/weatherReport');
 
+const zones = {
+  FD: 'Forbidden Depths',
+  LoC: 'Land of Continuity',
+  SC: 'Sunken City',
+  US: 'Under Spring'
+}
+
 let app = express();
 app.use(morgan('combined'));
 app.set('view engine', 'ejs');
@@ -22,7 +29,7 @@ app.get('/', async (req, res) => {
   if (req.query.zone) {
     supremes = materials.supremes(currentTime.season, weather[0].humidity, req.query.zone);
   }
-  res.render('index', { weather, supremes, zone: req.query.zone });
+  res.render('index', { weather, supremes, zones, zone: req.query.zone });
 });
 
 app.listen(process.env.PORT || 3000);

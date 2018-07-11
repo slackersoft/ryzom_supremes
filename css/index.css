@@ -49,3 +49,10 @@ ol {
 .worst {
   color: #FF7500;
 }
+
+.materials {
+  list-style: none;
+  padding-left: 0;
+}
+
+
