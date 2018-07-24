@@ -29,7 +29,8 @@ app.get('/', async (req, res) => {
   if (req.query.zone) {
     supremes = materials.supremes(currentTime.season, weather[0].humidity, req.query.zone);
   }
-  res.render('index', { weather, supremes, zones, zone: req.query.zone });
+  const nextChange = weather.find(w => w.weatherClass !== weather[0].weatherClass);
+  res.render('index', { weather, supremes, zones, nextChange, zone: req.query.zone });
 });
 
 app.listen(process.env.PORT || 3000);

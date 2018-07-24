@@ -27,16 +27,17 @@
                   <a href="?zone=<%= z %>"><%= zones[z] %></a>
                 <% }) %>
                 </td>
-                <td>
+                <td rowspan="2">
                   <ol>
+                  <li><span class="hour">Time</span> Humidity</li>
                   <% weather.forEach(w => { %>
-                    <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.hourOfDay %></span> <%= w.humidity %></li>
+                    <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.prettyHour() %></span> <%= w.humidity %></li>
                   <% }) %>
                   </ol>
                 </td>
-                <% if(zone) { %>
-                  <td>
-                    <h2><%= zones[zone] %> Materials</h2>
+                <td rowspan="2">
+                  <% if(zone) { %>
+                    <h2><%= zones[zone] %> Supreme Materials up now (until <span class="<%= nextChange.weatherClass %>"><%= nextChange.ryzomTime.prettyHour() %></span>)</h2>
                     <% if(supremes.length > 0) { %>
                       <ul class="materials">
                       <% supremes.forEach(mat => { %>
@@ -46,8 +47,21 @@
                     <% } else { %>
                       <div>Nothing up in this weather</div>
                     <% } %>
-                  </td>
-                <% } %>
+                  <% } else { %>
+                    <h2> Next weather change at <span class="<%= nextChange.weatherClass %>"><%= nextChange.ryzomTime.prettyHour() %></span></h2>
+                  <% } %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <ol>
+                    <li>weather</li>
+                    <li class="best">Best (83% &uarr;)</li>
+                    <li class="good">Good (50-83%)</li>
+                    <li class="bad">Bad (16-50%)</li>
+                    <li class="worst">Worst (16% &darr;)</li>
+                  </ol>
+                </td>
               </tr>
             </tbody>
           </table>
