@@ -37,18 +37,41 @@
                 </td>
                 <td rowspan="2">
                   <% if(zone) { %>
-                    <h2><%= zones[zone] %> Supreme Materials up now (until <span class="<%= nextChange.weatherClass %>"><%= nextChange.ryzomTime.prettyHour() %></span>)</h2>
-                    <% if(supremes.length > 0) { %>
-                      <ul class="materials">
-                      <% supremes.forEach(mat => { %>
-                        <li class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></li>
-                      <% }) %>
-                      </ul>
-                    <% } else { %>
-                      <div>Nothing up in this weather</div>
-                    <% } %>
-                  <% } else { %>
-                    <h2> Next weather change at <span class="<%= nextChange.weatherClass %>"><%= nextChange.ryzomTime.prettyHour() %></span></h2>
+                    <h2><%= zones[zone] %> Materials - <%= seasons[weather[0].ryzomTime.season] %></h2>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Material</th>
+                          <th>Sup</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% supremes.current.mats.forEach(mat => { %>
+                          <tr>
+                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
+                            <td class="<%= weather[0].weatherClass %>">Now until <%= supremes.next.weather.ryzomTime.prettyHour() %></td>
+                          </tr>
+                        <% }) %>
+                        <% supremes.next.mats.forEach(mat => { %>
+                          <tr>
+                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
+                            <td class="<%= supremes.next.weather.weatherClass %>"><%= supremes.next.weather.ryzomTime.prettyHour() %></td>
+                          </tr>
+                        <% }) %>
+                        <% supremes.afterThat.mats.forEach(mat => { %>
+                          <tr>
+                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
+                            <td class="<%= supremes.afterThat.weather.weatherClass %>"><%= supremes.afterThat.weather.ryzomTime.prettyHour() %></td>
+                          </tr>
+                        <% }) %>
+                        <% supremes.lastOne.mats.forEach(mat => { %>
+                          <tr>
+                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
+                            <td class="<%= supremes.lastOne.weather.weatherClass %>"><%= supremes.lastOne.weather.ryzomTime.prettyHour() %></td>
+                          </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
                   <% } %>
                 </td>
               </tr>

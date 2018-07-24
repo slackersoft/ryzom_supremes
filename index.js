@@ -12,6 +12,8 @@ const zones = {
   US: 'Under Spring'
 }
 
+const seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
+
 let app = express();
 app.use(morgan('combined'));
 app.set('view engine', 'ejs');
@@ -25,12 +27,29 @@ app.get('/', async (req, res) => {
     times.push(times[times.length - 1].next());
   }
   let weather = times.map(time => new WeatherReport(time, Math.floor(humidity(time.cycleNumber) * 100)));
-  let supremes = [];
+  let supremes = {};
   if (req.query.zone) {
-    supremes = materials.supremes(currentTime.season, weather[0].humidity, req.query.zone);
+    supremes.current = {
+      mats: materials.supremes(currentTime.season, weather[0].humidity, req.query.zone),
+      weather: weather[0],
+    };
+    const nextChange = weather.find(w => w.weatherClass !== weather[0].weatherClass);
+    supremes.next = {
+      mats: materials.supremes(nextChange.ryzomTime.season, nextChange.humidity, req.query.zone),
+      weather: nextChange,
+    };
+    const afterThat = weather.find(w => w.weatherClass !== weather[0].weatherClass && w.weatherClass !== nextChange.weatherClass);
+    supremes.afterThat = {
+      mats: materials.supremes(afterThat.ryzomTime.season, afterThat.humidity, req.query.zone),
+      weather: afterThat,
+    };
+    const lastOne = weather.find(w => [weather[0].weatherClass, nextChange.weatherClass, afterThat.weatherClass].indexOf(w.weatherClass) < 0)
+    supremes.lastOne = {
+      mats: materials.supremes(lastOne.ryzomTime.season, lastOne.humidity, req.query.zone),
+      weather: lastOne,
+    };
   }
-  const nextChange = weather.find(w => w.weatherClass !== weather[0].weatherClass);
-  res.render('index', { weather, supremes, zones, nextChange, zone: req.query.zone });
+  res.render('index', { weather, supremes, zones, seasons, zone: req.query.zone });
 });
 
 app.listen(process.env.PORT || 3000);
