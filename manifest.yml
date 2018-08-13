@@ -1,0 +1,10 @@
+---
+
+applications:
+  - name: pr-bunnies
+    buildpack: nodejs_buildpack
+    memory: 256M
+    instances: 2
+    command: node index.js
+    services:
+      - secrets

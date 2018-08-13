@@ -1,6 +1,7 @@
 <html>
 <head>
-<title>Supremes</title>
+<title>PR Bunnies</title>
+<link rel="icon" href="/images/PR Bunny.png" />
 <link rel="stylesheet" href="http://api.ryzom.com/data/css/ryzom_ui.css" />
 <link rel="stylesheet" href="/css/index.css" />
 </head>
@@ -10,7 +11,7 @@
   <div class="ryzom-ui-tl">
     <div class="ryzom-ui-tr">
       <div class="ryzom-ui-t">
-        Supremes
+        PR Bunnies
       </div>
     </div>
   </div>
@@ -22,18 +23,29 @@
           <table>
             <tbody>
               <tr>
-                <td class="nav">
+                <td class="nav" width="200" valign="top">
                 <% Object.keys(zones).forEach(z => { %>
-                  <a href="?zone=<%= z %>"><%= zones[z] %></a>
+                  <div><a href="?zone=<%= z %>"><%= zones[z] %></a></div>
+                  <br/>
                 <% }) %>
                 </td>
-                <td rowspan="2">
-                  <ol>
-                  <li><span class="hour">Time</span> Humidity</li>
+                <td rowspan="2" width="150">
+                  <table>
+                  <tr>
+                    <th><%= weather[0].ryzomTime.prettyHour() %></th>
+                    <th><%= weather[0].ryzomTime.time %></th>
+                  </tr>
+                  <tr>
+                    <th>Time</th>
+                    <th>Humidity</th>
+                  </tr>
                   <% weather.forEach(w => { %>
-                    <li class="<%= w.weatherClass %>"><span class="hour"><%= w.ryzomTime.prettyHour() %></span> <%= w.humidity %></li>
+                    <tr>
+                      <td><a href="#" style="<%= w.weatherColor %>"><%= w.ryzomTime.prettyHour() %></a></td>
+                      <td><a href="$" style="<%= w.weatherColor %>"><%= w.humidity %></a></td>
+                    </tr>
                   <% }) %>
-                  </ol>
+                  </table>
                 </td>
                 <td rowspan="2">
                   <% if(zone) { %>
@@ -49,25 +61,25 @@
                         <% supremes.current.mats.forEach(mat => { %>
                           <tr>
                             <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td class="<%= weather[0].weatherClass %>">Now until <%= supremes.next.weather.ryzomTime.prettyHour() %></td>
+                            <td><a href="#" style="<%= weather[0].weatherColor %>">Now until <%= supremes.next.weather.ryzomTime.prettyHour() %></td>
                           </tr>
                         <% }) %>
                         <% supremes.next.mats.forEach(mat => { %>
                           <tr>
                             <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td class="<%= supremes.next.weather.weatherClass %>"><%= supremes.next.weather.ryzomTime.prettyHour() %></td>
+                            <td><a href="#" style="<%= supremes.next.weather.weatherColor %>"><%= supremes.next.weather.ryzomTime.prettyHour() %></td>
                           </tr>
                         <% }) %>
                         <% supremes.afterThat.mats.forEach(mat => { %>
                           <tr>
                             <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td class="<%= supremes.afterThat.weather.weatherClass %>"><%= supremes.afterThat.weather.ryzomTime.prettyHour() %></td>
+                            <td><a href="#" style="<%= supremes.afterThat.weather.weatherColor %>"><%= supremes.afterThat.weather.ryzomTime.prettyHour() %></td>
                           </tr>
                         <% }) %>
                         <% supremes.lastOne.mats.forEach(mat => { %>
                           <tr>
                             <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td class="<%= supremes.lastOne.weather.weatherClass %>"><%= supremes.lastOne.weather.ryzomTime.prettyHour() %></td>
+                            <td><a href="#" style="<%= supremes.lastOne.weather.weatherColor %>"><%= supremes.lastOne.weather.ryzomTime.prettyHour() %></td>
                           </tr>
                         <% }) %>
                       </tbody>
@@ -77,13 +89,11 @@
               </tr>
               <tr>
                 <td>
-                  <ol>
-                    <li>weather</li>
-                    <li class="worst">Worst (83% &uarr;)</li>
-                    <li class="bad">Bad (50-83%)</li>
-                    <li class="good">Good (16-50%)</li>
-                    <li class="best">Best (16% &darr;)</li>
-                  </ol>
+                  <div>Weather</div>
+                  <div><a href="#" style="color: #FF7500; text-decoration: none;" class="worst">Worst (83% &uarr;)</a></div>
+                  <div><a href="#" style="color: #A494E4; text-decoration: none;" class="bad">Bad (50-83%)</a></div>
+                  <div><a href="#" style="color: #00CCFF; text-decoration: none;" class="good">Good (16-50%)</a></div>
+                  <div><a href="#" style="color: #FF00FF; text-decoration: none;" class="best">Best (16% &darr;)</a></div>
                 </td>
               </tr>
             </tbody>
