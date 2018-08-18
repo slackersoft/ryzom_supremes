@@ -2,7 +2,7 @@
 <head>
 <title>PR Bunnies</title>
 <link rel="icon" href="/images/PR_Bunny.png" />
-<link rel="stylesheet" href="http://api.ryzom.com/data/css/ryzom_ui.css" />
+<link rel="stylesheet" href="//api.ryzom.com/data/css/ryzom_ui.css" />
 <link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
@@ -53,6 +53,7 @@
                     <table>
                       <thead>
                         <tr>
+                          <th></th>
                           <th>Material</th>
                           <th>Sup</th>
                         </tr>
@@ -63,7 +64,9 @@
                             <tr>
                               <td>
                                 <img src="/images/<%= mat.type.toLowerCase().replace(' ', '_') %>.png" alt="<%= mat.type %>" width="20" height="20"/>
-                                <span><%= mat.type %> - <%= mat.name %></span>
+                              </td>
+                              <td>
+                                <%= mat.type %> - <%= mat.name %>
                               </td>
                               <td style="<%= getWeatherColor(band.weather.weatherClass) %>">
                                 <%= band.weather.ryzomTime.prettyHour() %>
