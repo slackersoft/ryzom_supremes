@@ -40,9 +40,9 @@
                     <th>Humidity</th>
                   </tr>
                   <% weather.forEach(w => { %>
-                    <tr>
-                      <td><a href="#" style="<%= w.weatherColor %>"><%= w.ryzomTime.prettyHour() %></a></td>
-                      <td><a href="$" style="<%= w.weatherColor %>"><%= w.humidity %></a></td>
+                    <tr style="<%= getWeatherColor(w.weatherClass) %>">
+                      <td><%= w.ryzomTime.prettyHour() %></td>
+                      <td><%= w.humidity %></td>
                     </tr>
                   <% }) %>
                   </table>
@@ -58,29 +58,20 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <% supremes.current.mats.forEach(mat => { %>
-                          <tr>
-                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td><a href="#" style="<%= weather[0].weatherColor %>">Now until <%= supremes.next.weather.ryzomTime.prettyHour() %></td>
-                          </tr>
-                        <% }) %>
-                        <% supremes.next.mats.forEach(mat => { %>
-                          <tr>
-                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td><a href="#" style="<%= supremes.next.weather.weatherColor %>"><%= supremes.next.weather.ryzomTime.prettyHour() %></td>
-                          </tr>
-                        <% }) %>
-                        <% supremes.afterThat.mats.forEach(mat => { %>
-                          <tr>
-                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td><a href="#" style="<%= supremes.afterThat.weather.weatherColor %>"><%= supremes.afterThat.weather.ryzomTime.prettyHour() %></td>
-                          </tr>
-                        <% }) %>
-                        <% supremes.lastOne.mats.forEach(mat => { %>
-                          <tr>
-                            <td class="<%= mat.type %>"><%= mat.name %> <%= mat.type %></td>
-                            <td><a href="#" style="<%= supremes.lastOne.weather.weatherColor %>"><%= supremes.lastOne.weather.ryzomTime.prettyHour() %></td>
-                          </tr>
+                        <% bands.forEach(band => { %>
+                          <% band.sups.forEach(mat => { %>
+                            <tr>
+                              <td>
+                                <img src="/images/<%= mat.type.toLowerCase().replace(' ', '_') %>.png" alt="<%= mat.type %>" width="20" height="20"/>
+                                <span><%= mat.type %> - <%= mat.name %></span>
+                              </td>
+                              <td style="<%= getWeatherColor(band.weather.weatherClass) %>">
+                                <%= band.weather.ryzomTime.prettyHour() %>
+                                -
+                                <%= band.endTime && band.endTime.prettyHour() %>
+                              </td>
+                            </tr>
+                          <% }) %>
                         <% }) %>
                       </tbody>
                     </table>
@@ -90,10 +81,10 @@
               <tr>
                 <td>
                   <div>Weather</div>
-                  <div><a href="#" style="color: #FF7500; text-decoration: none;" class="worst">Worst (83% &uarr;)</a></div>
-                  <div><a href="#" style="color: #A494E4; text-decoration: none;" class="bad">Bad (50-83%)</a></div>
-                  <div><a href="#" style="color: #00CCFF; text-decoration: none;" class="good">Good (16-50%)</a></div>
-                  <div><a href="#" style="color: #FF00FF; text-decoration: none;" class="best">Best (16% &darr;)</a></div>
+                  <div style="<%= getWeatherColor('worst') %>">Worst (83% &uarr;)</div>
+                  <div style="<%= getWeatherColor('bad') %>">Bad (50-83%)</div>
+                  <div style="<%= getWeatherColor('good') %>">Good (16-50%)</div>
+                  <div style="<%= getWeatherColor('best') %>">Best (16% &darr;)</div>
                 </td>
               </tr>
             </tbody>

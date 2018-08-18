@@ -34,30 +34,38 @@ if (process.env['NODE_ENV'] === 'production') {
   app.use(auth(secrets.appKey));
 }
 
-function sups(allWeather, zone, startIndex) {
-  return {
-    mats: materials.supremes(allWeather[startIndex].ryzomTime.season, allWeather[startIndex].humidity, zone),
-    weather: allWeather[startIndex],
-  };
-}
-
-function upcomingWeatherBands(weather) {
+function upcomingWeatherBands(weather, zone) {
   const bands = [];
   weather.forEach(w => {
     if (bands.length === 0) {
       bands.push({
-        weather: w
+        weather: w,
+        sups: materials.supremes(w.ryzomTime.season, w.humidity, zone)
       });
     } else if (!bands[bands.length - 1].endTime && w.weatherClass !== bands[bands.length - 1].weather.weatherClass) {
       bands[bands.length - 1].endTime = w.ryzomTime;
     }
     if (bands[bands.length - 1].endTime && bands.map(b => b.weather.weatherClass).every(wc => wc !== w.weatherClass)) {
       bands.push({
-        weather: w
+        weather: w,
+        sups: materials.supremes(w.ryzomTime.season, w.humidity, zone)
       });
     }
   });
   return bands;
+}
+
+function getWeatherColor(weatherClass) {
+  switch(weatherClass) {
+    case 'best':
+      return 'background-color: #CF49CF;color: #222222;';
+    case 'good':
+      return 'background-color: #00CCFF;color: #222222;';
+    case 'bad':
+      return 'background-color: #A494E4;color: #222222;';
+    case 'worst':
+      return 'background-color: #FFA960;color: #222222;';
+  }
 }
 
 app.get('/', async (req, res) => {
@@ -67,32 +75,12 @@ app.get('/', async (req, res) => {
     times.push(times[times.length - 1].next());
   }
   let weather = times.map(time => new WeatherReport(time, Math.floor(humidity(time.cycleNumber) * 100)));
-  let supremes = {};
+  let bands = []
   if (req.query.zone) {
-    console.dir(upcomingWeatherBands(weather));
-    supremes.current = sups(weather, req.query.zone, 0);
-//    {
-//      mats: materials.supremes(weather[0].ryzomTime.season, weather[0].humidity, req.query.zone),
-//      weather: weather[0],
-//    };
-    const nextChange = weather.find(w => w.weatherClass !== weather[0].weatherClass);
-    supremes.next = {
-      mats: materials.supremes(nextChange.ryzomTime.season, nextChange.humidity, req.query.zone),
-      weather: nextChange,
-    };
-    const afterThat = weather.find(w => w.weatherClass !== weather[0].weatherClass && w.weatherClass !== nextChange.weatherClass);
-    supremes.afterThat = {
-      mats: materials.supremes(afterThat.ryzomTime.season, afterThat.humidity, req.query.zone),
-      weather: afterThat,
-    };
-    const lastOne = weather.find(w => [weather[0].weatherClass, nextChange.weatherClass, afterThat.weatherClass].indexOf(w.weatherClass) < 0)
-    supremes.lastOne = {
-      mats: materials.supremes(lastOne.ryzomTime.season, lastOne.humidity, req.query.zone),
-      weather: lastOne,
-    };
+    bands = upcomingWeatherBands(weather, req.query.zone);
   }
 
-  res.render('index', { weather, supremes, zones, seasons, zone: req.query.zone });
+  res.render('index', { weather, bands, zones, seasons, getWeatherColor, zone: req.query.zone });
 });
 
 app.use((err, req, res, next) => {
