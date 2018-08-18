@@ -4,13 +4,6 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-table {
-  width: 100%;
-}
-
-td {
-  vertical-align: top;
-}
 
 .nav a {
   color: #ffda3b;

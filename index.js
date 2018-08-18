@@ -80,7 +80,9 @@ app.get('/', async (req, res) => {
     bands = upcomingWeatherBands(weather, req.query.zone);
   }
 
-  res.render('index', { weather, bands, zones, seasons, getWeatherColor, zone: req.query.zone });
+  const view = req.query.ig ? 'ig' : 'index';
+
+  res.render(view, { weather, bands, zones, seasons, getWeatherColor, zone: req.query.zone });
 });
 
 app.use((err, req, res, next) => {
