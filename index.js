@@ -58,13 +58,13 @@ function upcomingWeatherBands(weather, zone) {
 function getWeatherColor(weatherClass) {
   switch(weatherClass) {
     case 'best':
-      return 'background-color: #CF49CF;color: #222222;';
+      return '#CF49CF';
     case 'good':
-      return 'background-color: #00CCFF;color: #222222;';
+      return '#00CCFF';
     case 'bad':
-      return 'background-color: #A494E4;color: #222222;';
+      return '#A494E4';
     case 'worst':
-      return 'background-color: #FFA960;color: #222222;';
+      return '#FFA960';
   }
 }
 

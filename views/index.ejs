@@ -40,7 +40,7 @@
                     <th>Humidity</th>
                   </tr>
                   <% weather.forEach(w => { %>
-                    <tr style="<%= getWeatherColor(w.weatherClass) %>">
+                    <tr bgcolor="<%= getWeatherColor(w.weatherClass) %>">
                       <td><%= w.ryzomTime.prettyHour() %></td>
                       <td><%= w.humidity %></td>
                     </tr>
@@ -68,7 +68,7 @@
                               <td>
                                 <%= mat.type %> - <%= mat.name %>
                               </td>
-                              <td style="<%= getWeatherColor(band.weather.weatherClass) %>">
+                              <td bgcolor="<%= getWeatherColor(band.weather.weatherClass) %>">
                                 <%= band.weather.ryzomTime.prettyHour() %>
                                 -
                                 <%= band.endTime && band.endTime.prettyHour() %>
@@ -83,11 +83,13 @@
               </tr>
               <tr>
                 <td>
-                  <div>Weather</div>
-                  <div style="<%= getWeatherColor('worst') %>">Worst (83% &uarr;)</div>
-                  <div style="<%= getWeatherColor('bad') %>">Bad (50-83%)</div>
-                  <div style="<%= getWeatherColor('good') %>">Good (16-50%)</div>
-                  <div style="<%= getWeatherColor('best') %>">Best (16% &darr;)</div>
+                  <table>
+                  <tr><th>Weather</th></tr>
+                  <tr><td bgcolor="<%= getWeatherColor('worst') %>">Worst (83% &uarr;)</td></tr>
+                  <tr><td bgcolor="<%= getWeatherColor('bad') %>">Bad (50-83%)</td></tr>
+                  <tr><td bgcolor="<%= getWeatherColor('good') %>">Good (16-50%)</td></tr>
+                  <tr><td bgcolor="<%= getWeatherColor('best') %>">Best (16% &darr;)</td></tr>
+                  </table>
                 </td>
               </tr>
             </tbody>
