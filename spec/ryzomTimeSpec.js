@@ -1,0 +1,18 @@
+const { ryzomTime } = require('../lib/ryzomTime');
+
+describe('ryzomTime', () => {
+  it('finds the cycleNumber', () => {
+    const time = ryzomTime({
+      server_tick: ['1975414721'],
+      season: ['3'],
+      cache: [{'$': { created: '1534714874' } }],
+    }, 1534714874000);
+
+    expect(time.prettyHour()).toEqual('03:00');
+    expect(time.cycleStart).toEqual(3);
+    expect(time.season).toEqual(3);
+    expect(time.cycleNumber).toEqual(365329);
+    expect(time.time()).toEqual('04:37');
+    // 4:43 Winter Prima, Mystia 07, 3rd AC 2599
+  });
+});

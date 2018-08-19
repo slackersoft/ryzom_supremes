@@ -4,6 +4,10 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+th {
+  text-align: left;
+}
+
 
 .nav a {
   color: #ffda3b;

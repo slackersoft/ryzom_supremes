@@ -5,7 +5,8 @@
     "node": "8.11.3"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "jasmine"
   },
   "dependencies": {
     "bignum": "^0.12.5",
@@ -13,6 +14,7 @@
     "cookie-session": "^2.0.0-beta.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "jasmine": "^3.2.0",
     "morgan": "^1.9.0",
     "php-unserialize": "0.0.1",
     "xml2js": "^0.4.19"

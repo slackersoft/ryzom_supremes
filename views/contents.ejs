@@ -16,11 +16,11 @@
           <td>
             <br/><br/><br/>
             <table width="80%">
-            <tr><th>Weather</th></tr>
-            <tr><td bgcolor="<%= getWeatherColor('worst') %>">Worst (83% &uarr;)</td></tr>
-            <tr><td bgcolor="<%= getWeatherColor('bad') %>">Bad (50-83%)</td></tr>
-            <tr><td bgcolor="<%= getWeatherColor('good') %>">Good (16-50%)</td></tr>
-            <tr><td bgcolor="<%= getWeatherColor('best') %>">Best (16% &darr;)</td></tr>
+            <tr><th align="left">Weather</th></tr>
+            <tr><td style="<%= getWeatherColor('worst') %>">Worst (83% &uarr;)</td></tr>
+            <tr><td style="<%= getWeatherColor('bad') %>">Bad (50-83%)</td></tr>
+            <tr><td style="<%= getWeatherColor('good') %>">Good (16-50%)</td></tr>
+            <tr><td style="<%= getWeatherColor('best') %>">Best (16% &darr;)</td></tr>
             </table>
           </td>
         </tr>
@@ -29,15 +29,15 @@
       <td width="150" height="700" valign="top">
         <table>
         <tr>
-          <th><%= weather[0].ryzomTime.prettyHour() %></th>
-          <th><%= weather[0].ryzomTime.time %></th>
+          <th align="left"><%= weather[0].ryzomTime.time() %></th>
+          <th align="left"></th>
         </tr>
         <tr>
-          <th>Time</th>
-          <th>Humidity</th>
+          <th width="50" align="left">Time</th>
+          <th align="left">Humidity</th>
         </tr>
         <% weather.forEach(w => { %>
-          <tr bgcolor="<%= getWeatherColor(w.weatherClass) %>">
+          <tr style="<%= getWeatherColor(w.weatherClass) %>">
             <td><%= w.ryzomTime.prettyHour() %></td>
             <td><%= w.humidity %></td>
           </tr>
@@ -50,9 +50,9 @@
           <table>
             <thead>
               <tr>
-                <th width="25"></th>
-                <th>Material</th>
-                <th>Sup</th>
+                <th width="25" align="left"></th>
+                <th align="left">Material</th>
+                <th align="left">Sup</th>
               </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
                     <td>
                       <%= mat.type %> - <%= mat.name %>
                     </td>
-                    <td bgcolor="<%= getWeatherColor(band.weather.weatherClass) %>">
+                    <td style="<%= getWeatherColor(band.weather.weatherClass) %>">
                       <%= band.weather.ryzomTime.prettyHour() %>
                       -
                       <%= band.endTime && band.endTime.prettyHour() %>
