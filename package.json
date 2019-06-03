@@ -11,12 +11,16 @@
   "dependencies": {
     "bignum": "^0.13.0",
     "cfenv": "^1.1.0",
+    "cookie-parser": "^1.4.4",
     "cookie-session": "^2.0.0-beta.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "jasmine": "^3.2.0",
     "morgan": "^1.9.0",
     "php-unserialize": "0.0.1",
+    "request": "^2.88.0",
+    "time": "^0.12.0",
+    "tzdata": "^1.0.16",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {

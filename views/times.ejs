@@ -1,0 +1,23 @@
+<table>
+<tr>
+<th>Time Zone</th>
+<th>Current Time</th>
+</tr>
+<% timeZones.forEach(zone => { %>
+  <tr>
+    <td><%= zone %></td>
+    <td><%= timeInZone(now, zone) %></td>
+  </tr>
+<% }) %>
+</table>
+<form method="post" action="/time/addZone">
+  <select name="zone">
+    <option value="">Select Time Zone</option>
+    <% allZones.forEach(zone => { %>
+      <option value="<%= zone %>">
+        <%= zone %>
+      </option>
+    <% }) %>
+  </select>
+  <input type="submit" value="+ Add"/>
+</form>

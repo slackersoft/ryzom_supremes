@@ -1,9 +1,15 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cookie = require('cookie');
 const morgan = require('morgan');
+const time = require('time');
 const ryzomTime = require('./lib/ryzomTime');
 const humidity = require('./lib/humidity');
 const materials = require('./lib/materials');
 const WeatherReport = require('./lib/weatherReport');
+const tzdata = require('tzdata');
+
+const allZones = Object.keys(tzdata.zones).sort();
 
 const zones = {
   FD: 'Forbidden Depths',
@@ -16,6 +22,7 @@ const seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 
 let app = express();
 app.use(morgan('combined'));
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 app.use('/css', express.static('css'));
@@ -80,9 +87,43 @@ app.get('/', async (req, res) => {
     bands = upcomingWeatherBands(weather, req.query.zone);
   }
 
-  const view = req.query.ig ? 'ig' : 'index';
+  const layout = req.query.ig ? 'ig' : 'index';
 
-  res.render(view, { weather, bands, zones, seasons, getWeatherColor, zone: req.query.zone });
+  res.render(layout, { view: 'contents', params: {
+    weather, bands, zones, seasons, getWeatherColor, zone: req.query.zone
+  }});
+});
+
+function currentZones(req, res, additionalZones) {
+  const current = req.cookies.zone ? JSON.parse(req.cookies.zone) : [];
+  additionalZones = additionalZones || [];
+  const total = current.concat(additionalZones);
+  res.setHeader('Set-Cookie',
+    cookie.serialize('zone', JSON.stringify(total), {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 365 // 1 year
+    }));
+
+  return total;
+}
+
+app.get('/time', (req, res) => {
+  const now = new time.Date();
+  const timeZones = ['UTC'].concat(currentZones(req, res));
+
+  const layout = req.query.ig ? 'ig' : 'index';
+  res.render(layout, { view: 'times', params: {
+    now, timeZones, allZones, timeInZone: (t, z) => {
+      t.setTimezone(z);
+      return t.toString();
+    }
+  }});
+});
+
+app.use('/time/addZone', express.urlencoded());
+app.post('/time/addZone', (req, res) => {
+  currentZones(req, res, [req.body.zone]);
+  res.redirect('/time');
 });
 
 app.use((err, req, res, next) => {
